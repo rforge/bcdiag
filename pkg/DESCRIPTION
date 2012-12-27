@@ -1,0 +1,10 @@
+Package: BcDiag
+Type: Package
+Title: Diagnostics plots for Bicluster Data
+Version: 1.0
+Date: 2012-11-15
+Author: Aregay Mengsteab F.,Tatsiana KHAMIAKOVA, Martin Otava.
+Maintainer: Aregay Mengsteab F. <mycs.zab@gmail.com>
+Description: This package provides Diagnostics plots for Bicluster data obtained from packages; "biclust" by Kaiser et al.(2008),"isa2" by Csardi et al. (2010) and "fabia" by Hochreiter et al. (2010).
+Suggests: biclust,isa2, fabia 
+License: GPL-3
