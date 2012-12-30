@@ -17,38 +17,25 @@ indexedBic<-function(dset,bres,mname=c("fabia","isa2","biclust"),bnum){
 	l<-bnum
 	if(check=="fabia"){
 		#Extract biclusters:
-		require(fabia)
-		resf <- extractBic(bres)
 		#get the biclust index inside the dset 
-		#~ same as biclust of NumberxCol and RowxNumber format:
-		
+		library(fabia)
+		resf <- extractBic(bres)
 		bg<-resf$numn[1,]$numng
 		bc<-resf$numn[1,]$numnp
-		
-		
-		# tc<-resf$bic[l,]$biypn
-		# bc<-rep(0,length(tc))
-		
+		# the two indecies	
 		indg<-bg
 		indc<-bc
-	# for(i in 1:length(tc)){
-		# bc[i]<-grep(tc[i], colnames(dset)) }
-		# index genes
-		# tr<-resf$bic[l,]$bixn
-		# br<-rep(0,length(tr))
-		# for(i in 1:length(tr)){
-		# br[i]<-grep(tr[i], rownames(dset)) }
 	}
 	if(check=="isa2"){
 		#convert to biclust and get the biclust indecies
-		require(isa2)
+		library(isa2)
 		resi<-isa.biclust(bres)
 		indg<-which(resi@RowxNumber[,l])
 		indc<-which(resi@NumberxCol[l,])
 	
 	}
 	if(check=="biclust"){
-		require(biclust)
+		library(biclust)
 		indg<-which(bres@RowxNumber[,l])
 		indc<-which(bres@NumberxCol[l,])
 	
