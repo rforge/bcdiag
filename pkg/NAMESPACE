@@ -1,3 +1,5 @@
 exportPattern("^[[:alpha:]]+")
-importFrom("isa2", "isa.biclust")
-importFrom("fabia", "extractBic")
+export("anomedOnlybic","exploreBic","profileBic","exploreOnlybic","writeBic")
+import("fabia")
+import("isa2")
+import("biclust")

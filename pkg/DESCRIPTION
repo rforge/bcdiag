@@ -10,7 +10,7 @@ Authors@R: c(person("Aregay Mengsteab", "MSc Student", role = c("aut", "cre"),
 		email= "martin.otava@uhasselt.be"))
 License: GPL (>= 2)
 Suggests: biclust, isa2, fabia 
-Imports: isa2, fabia
+Imports: biclust, isa2, fabia
 Author:  Aregay Mengsteab
 Maintainer: Aregay Mengsteab <mycs.zab@gmail.com>
 Description: This package provides Diagnostics plots for Bicluster data
