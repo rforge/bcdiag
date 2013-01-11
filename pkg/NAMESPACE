@@ -1,5 +1,2 @@
 exportPattern("^[[:alpha:]]+")
 export("anomedOnlybic","exploreBic","profileBic","exploreOnlybic","writeBic")
-import("fabia")
-import("isa2")
-import("biclust")

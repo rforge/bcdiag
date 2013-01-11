@@ -34,9 +34,8 @@ Summary plot will display according to the user specification.
 \examples{
 data(breastc)
 # find bicluster using fabia algorithm
-require(fabia)
 fab<- fabia(breastc)
 # Plot the mean of biclusterd and clustered genes parallely.
-exploreBic(dset=breastc,bres=fab,gby="conditions",pfor="quant",mname="fabia")
+exploreBic(dset=breastc,bres=fab,gby="conditions",pfor="mean",mname="fabia")
 }
 \keyword{exploreBic}

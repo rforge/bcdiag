@@ -22,7 +22,6 @@ writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2",
 	arrayNames<-dimnames(dset)[2][[1]]
 	check<- match.arg(mname)
 	if(check=="fabia") {
-		require(fabia)
 		#Extract biclusters:
 		resb <-extractBic(bicResult)
 		write(c(resb$np,bicname), file = fileName, append = append)
@@ -38,7 +37,6 @@ writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2",
 		}
 	}
 	if(check=="isa2"){
-		require(biclust);require(isa2)
 		bicResult<-isa.biclust(bicResult)
 		write(c(bicResult@Number,bicname), file = fileName, append = append)
 		for (i in 1:bicResult@Number) {

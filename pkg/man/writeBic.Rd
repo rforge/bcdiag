@@ -40,12 +40,11 @@ Csardi G., Kutalik Z., and Bergmann S.(2010). Modular analysis of gene expressio
 \examples{
 #manupilate the biclust result
 data(breastc)
-require(isa2)
-isa<- isa(breastc)
+fab<- fabia(breastc)
 #write the bicluster result in to a text
-writeBic(dset=breastc,fileName="isabreast.txt",
-bicResult=isa, bicname="Biclust results for isa",
-mname="isa2")
+writeBic(dset=breastc,fileName="fabiabreast.txt",
+bicResult=fab, bicname="Biclust results for fabia",
+mname="fabia")
 }
 
 \keyword{writeBic}

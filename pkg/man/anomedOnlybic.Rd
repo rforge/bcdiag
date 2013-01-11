@@ -35,8 +35,7 @@ residual plots or residual box plots.
 \examples{
 data(breastc)
 # find bicluster using one of biclust algorithms
-require(biclust)
 bic<- biclust(breastc, method=BCPlaid())
-#fit anova residual plot
-anomedOnlybic(dset=breastc,bres=bic,fit="aplot",mname="biclust")}
+#fit residual boxplot from ANOVA
+anomedOnlybic(dset=breastc,bres=bic,fit="boxplot",mname="biclust")}
 \keyword{anomedOnlybic}
