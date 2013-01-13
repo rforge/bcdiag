@@ -1,5 +1,5 @@
 Package: BcDiag
-Version: 1.0
+Version: 1.0.1
 Date: 2012-11-15
 Title: Diagnostics plots for Bicluster Data
 Authors@R: c(person("Aregay Mengsteab", "MSc Student", role = c("aut", "cre"),
