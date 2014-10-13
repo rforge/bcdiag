@@ -8,7 +8,11 @@
 #' @gby, group by 'conditions' or 'genes'
 
 #----------------
-exploreOnlybic<-function(dset,bres,fit="all",gby="genes",mname="biclust",bnum=1){
+exploreOnlybic<-function(dset,bres,pfor="all",gby="genes",mname="biclust",bnum=1){
+	
+	# Change of variable name (to have same name convention as 'explorebic')
+	fit <- pfor
+
 	if(any(!mname %in% c("fabia","isa2","biclust"))){
 		stop("`mname' must be one of `fabia',`isa2' or biclust")
 	} 

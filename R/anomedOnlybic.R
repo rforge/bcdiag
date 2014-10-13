@@ -48,7 +48,7 @@ anomedOnlybic <- function(dset,bres,fit="boxplot",mname="biclust",bnum=1){
 		boxplot(split(fitan$resid,as.factor(gn)),add=F,col=2,main="Resid vs Genes(ANOVA)")
 
 		#residual boxplot for median polish 
-		boxplot(split(fitmp$resid,as.factor(cn)),col=3,main="Resid vs Condtions(Mpolish)")
+		boxplot(split(fitmp$resid,as.factor(cn)),col=3,main="Resid vs Conditions(Mpolish)")
 		boxplot(split(fitmp$resid,as.factor(gn)),col=2,main="Resid vs Genes(Mpolish)")
 
 	}
@@ -62,7 +62,7 @@ anomedOnlybic <- function(dset,bres,fit="boxplot",mname="biclust",bnum=1){
 	if(fit=="mpolishbplot"){
 		#residual boxplot for median polish 
 		par(mfrow=c(2,1))
-		boxplot(split(fitmp$resid,as.factor(cn)),col=3,main="Resid vs Condtions(Mpolish)")
+		boxplot(split(fitmp$resid,as.factor(cn)),col=3,main="Resid vs Conditions(Mpolish)")
 		boxplot(split(fitmp$resid,as.factor(gn)),col=2,main="Resid vs Genes(Mpolish)")
 	}
 }
