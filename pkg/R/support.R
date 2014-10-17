@@ -1,3 +1,20 @@
+
+
+#--------------------------
+#' A function to transform the isa2 results to biclust results
+#--------------------------
+
+isa2biclust <- function(x){
+	Parameters <- list(seeddata=x$seeddata,rundata=x$rundata)
+	RowxNumber <- (x$rows != 0)
+	NumberxCol <- t(x$columns != 0)
+	Number <- ncol(x$rows)
+
+	out <- new("Biclust", Parameters=Parameters, RowxNumber=RowxNumber, NumberxCol=NumberxCol, Number=Number)
+	return(out)
+}
+
+
 #----------------------
 
 #' a function supports for explore bic function
@@ -132,7 +149,7 @@ indexedBic<-function(dset,bres,mname=c("fabia","isa2","biclust"),bnum){
 	}
 	if(check=="isa2"){
 		#convert to biclust and get the biclust indecies
-		resi<-isa.biclust(bres)
+		resi<-isa2biclust(bres)
 		indg<-which(resi@RowxNumber[,l])
 		indc<-which(resi@NumberxCol[l,])
 		

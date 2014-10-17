@@ -40,7 +40,7 @@ writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2",
 		}
 	}
 	if(check=="isa2"){
-		bicResult<-isa.biclust(bicResult)
+		bicResult<-isa2biclust(bicResult)
 		write(c(bicResult@Number,bicname), file = fileName, append = append)
 		for (i in 1:bicResult@Number) {
 			listar = row(matrix(bicResult@RowxNumber[, i]))[bicResult@RowxNumber[,i] == T]

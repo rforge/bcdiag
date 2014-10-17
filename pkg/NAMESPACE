@@ -1,3 +1,6 @@
+
+importFrom(fabia,extractBic)
 export("anomedOnlybic","exploreBic","profileBic","exploreOnlybic","writeBic")
 #import(biclust, fabia, isa2)
+
 
