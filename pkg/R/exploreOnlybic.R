@@ -13,9 +13,9 @@ exploreOnlybic<-function(dset,bres,pfor="all",gby="genes",mname="biclust",bnum=1
 	# Change of variable name (to have same name convention as 'explorebic')
 	fit <- pfor
 
-	if(any(!mname %in% c("fabia","isa2","biclust"))){
-		stop("`mname' must be one of `fabia',`isa2' or biclust")
-	} 
+	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
+		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
+	}
 	if(any(!gby %in% c("genes","conditions"))){
 		stop("`gby' must be one of Genes' or 'Condtions'")
 	} 

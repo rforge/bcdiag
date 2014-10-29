@@ -12,10 +12,10 @@
 
 #-------------------------
 
-writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2","biclust"),append = TRUE, delimiter = " "){
+writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2","biclust","bicare"),append = TRUE, delimiter = " "){
 	#check the method name
-	if(any(!mname %in% c("fabia","isa2","biclust"))){
-		stop("`mname' must be one of `fabia',`isa2' or 'biclust'")
+	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
+		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
 	} 
 	#names of the data set
 	geneNames<-dimnames(dset)[1][[1]]
@@ -65,6 +65,26 @@ writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2",
 				append = TRUE, sep = delimiter)
 			write(arrayNames[listac], file = fileName, ncolumns = length(listac), 
 				append = TRUE, sep = delimiter)
+		}
+	}
+	if(check=="bicare"){
+		x <- bicResult
+		Parameters <- list(numberofbicluster=x$param[1,2],residuthreshold=x$param[2,2],genesinitialprobability=x$param[3,2],samplesinitialprobability=x$param[4,2],numberofiterations=x$param[5,2],date=x$param[6,2])
+		RowxNumber <- t(x$bicRow==1)
+		NumberxCol <- x$bicCol==1
+		Number <- as.numeric(dim(RowxNumber)[2])
+		info <- list()
+		bicResult <- new("Biclust",Parameters=Parameters,RowxNumber=RowxNumber,NumberxCol=NumberxCol,Number=Number,info=info)
+		write(c(bicResult@Number,bicname), file = fileName, append = append)
+		for (i in 1:bicResult@Number) {
+			listar = row(matrix(bicResult@RowxNumber[, i]))[bicResult@RowxNumber[,i] == T]
+			listac = row(matrix(bicResult@NumberxCol[i, ]))[bicResult@NumberxCol[i,] == T]
+			write(c(length(listar), length(listac)), file = fileName, 
+					ncolumns = 2, append = TRUE, sep = delimiter)
+			write(geneNames[listar], file = fileName, ncolumns = length(listar), 
+					append = TRUE, sep = delimiter)
+			write(arrayNames[listac], file = fileName, ncolumns = length(listac), 
+					append = TRUE, sep = delimiter)
 		}
 	}
 }

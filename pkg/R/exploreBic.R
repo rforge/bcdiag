@@ -17,8 +17,8 @@ exploreBic<-function(dset,bres,gby="genes",pfor="mean",mname="biclust",bnum=1){
 	if(any(!pfor %in% c("all","mean","variance","median","quant","mad"))) {
 		stop("`pfor' must be one of `all', `mean', `variance','median', mad, or `quant'")
 	}
-	if(any(!mname %in% c("fabia","isa2","biclust"))){
-		stop("`mname' must be one of `fabia',`isa2' or 'biclust'")
+	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
+		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
 	} 
 	if(any(!gby %in% c("genes","conditions"))){
 		stop("`gby' must be one of `genes', or `conditions'")

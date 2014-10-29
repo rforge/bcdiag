@@ -11,12 +11,14 @@ exploreOnlybic(dset, bres, pfor= "all", gby= "genes", mname="biclust",bnum=1)
   \item{bres}{biclustering result.}
   \item{gby}{group bicluster; 'genes' or 'conditions'.}
   \item{pfor}{fit a plot for 'mean', 'median', 'variance', 'mad', 'all', or 'quant' (quantile).}
-  \item{mname}{method name; 'biclust', 'isa2' or 'fabia'.}
+  \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'.}
   \item{bnum}{existing biclusters; '1','2'...}
 }
 \details{The exploreOnlybic function has similar function with \code{\link{exploreBic}}. The only difference is that it provides exploratory plots only for biclustered data.}
 \value{
 Summary plot will display only for biclustered data.
+
+Note that the \code{"biclust"} option for \code{mname} will also accept results from the packages \pkg{iBBiG} and \pkg{rqubic}.
 }
 
 \author{Mengsteab Aregay \email{mycs.zab@gmail.com}}

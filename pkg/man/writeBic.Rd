@@ -6,7 +6,7 @@
 
 \usage{
 writeBic(dset, fileName, bicResult, bicname, 
-mname = c("fabia", "isa2", "biclust"), append = TRUE, delimiter = " ")
+mname = c("fabia", "isa2", "biclust","bicare"), append = TRUE, delimiter = " ")
 }
 
 \arguments{
@@ -14,13 +14,15 @@ mname = c("fabia", "isa2", "biclust"), append = TRUE, delimiter = " ")
   \item{fileName}{the name of the bicluster file to be saved.}
   \item{bicResult}{bicluster result obtained from 'biclust','isa2' or 'fabia'}
   \item{bicname}{the title to be given for the biclustered data.}
-  \item{mname}{method name; 'biclust', 'isa2' or 'fabia'}
+  \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'}
   \item{append}{logical value; TRUE as default}
   \item{delimiter}{delimiter in created output file; default value is " ".}
 }
 
-\details{The original function was developed in 'biclust' package by Kaiser \emph{et.al} (2008). We extend the function to be used for further bicluster algorithms, such as; 'isa2' and 'fabia'.}
+\details{The original function was developed in 'biclust' package by Kaiser \emph{et.al} (2008). We extend the function to be used for further bicluster algorithms, such as; 'isa2', 'fabia' and 'bicare'.
 
+Note that the \code{"biclust"} option for \code{mname} will also accept results from the packages \pkg{iBBiG} and \pkg{rqubic}.
+}
 \value{Biclustered text file with title, total number of biclustered, dimension and name of the biclustered genes(rows) or conditions(columns).}
 
 \references{

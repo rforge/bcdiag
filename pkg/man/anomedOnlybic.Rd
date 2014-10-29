@@ -11,12 +11,14 @@ anomedOnlybic(dset, bres, fit="boxplot", mname="biclust", bnum=1)
   \item{bres}{bicluster result.}
   \item{fit}{a string value to fit a plot;
 'aplot','mplot','anovbplot','mpolishbplot','boxplot'.}
-  \item{mname}{method name; 'biclust', 'isa2' or 'fabia'.}
+  \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'.}
   \item{bnum}{existing biclusters; '1','2'...}
 }
 \details{A function provides residuals plots for biclustered data based on ANOVA and median polish.
 
 The function checks the required parameter values and fit the plot according to the user requirements.
+
+Note that the \code{"biclust"} option for \code{mname} will also accept results from the packages \pkg{iBBiG} and \pkg{rqubic}.
 
 }
 \value{

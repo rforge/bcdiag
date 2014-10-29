@@ -133,7 +133,7 @@ explorePlot<-function(sbic,obic,pfor=c("all","mean","median","variance","mad","q
 #' @ indc; index for the biclust conditions.
 
 #----------------------
-indexedBic<-function(dset,bres,mname=c("fabia","isa2","biclust"),bnum){
+indexedBic<-function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bnum){
 	# which biclust object is it; 
 	check<-match.arg(mname)
 	l<-bnum
@@ -158,6 +158,17 @@ indexedBic<-function(dset,bres,mname=c("fabia","isa2","biclust"),bnum){
 		indg<-which(bres@RowxNumber[,l])
 		indc<-which(bres@NumberxCol[l,])
 		
+	}
+	if(check=="bicare"){
+		x <- bres
+		Parameters <- list(numberofbicluster=x$param[1,2],residuthreshold=x$param[2,2],genesinitialprobability=x$param[3,2],samplesinitialprobability=x$param[4,2],numberofiterations=x$param[5,2],date=x$param[6,2])
+		RowxNumber <- t(x$bicRow==1)
+		NumberxCol <- x$bicCol==1
+		Number <- as.numeric(dim(RowxNumber)[2])
+		info <- list()
+		resbi <- new("Biclust",Parameters=Parameters,RowxNumber=RowxNumber,NumberxCol=NumberxCol,Number=Number,info=info)
+		indg<-which(resbi@RowxNumber[,l])
+		indc<-which(resbi@NumberxCol[l,])
 	}
 	
 	# Warning for bicluster with 1 row and 1 column

@@ -6,13 +6,13 @@ The  profileBic function.
 \description{Provides profile plots for biclustered and clustered data.
 }
 \usage{
-profileBic(dset, bres, mname = c("fabia", "isa2", "biclust"), bplot = "all",
+profileBic(dset, bres, mname = c("fabia", "isa2", "biclust","bicare"), bplot = "all",
 gby = "genes", bnum = 1, teta = 120, ph = 30)
 }
 \arguments{
   \item{dset}{data matrix.}
   \item{bres}{biclustering result.}
-  \item{mname}{method name; 'biclust', 'isa2' or 'fabia'.}
+  \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'.}
   \item{bplot}{types of plots; 'all','lines', 'boxplot', 'histogram' or '3D'.}
   \item{gby}{grouped by; 'genes', or 'conditions'.}
   \item{bnum}{Existing biclusters; '1','2',...}
@@ -20,7 +20,9 @@ gby = "genes", bnum = 1, teta = 120, ph = 30)
   \item{ph}{numerical value to rotate the 3D; 0, 90, 180,...}
 }
 \details{
-The profile.bic function checks if all parameters are correctly submitted and then identifies the biclustered and clustered data.}
+The profile.bic function checks if all parameters are correctly submitted and then identifies the biclustered and clustered data.
+
+Note that the \code{"biclust"} option for \code{mname} will also accept results from the packages \pkg{iBBiG} and \pkg{rqubic}.}
 \value{
 profile.bic(dset, bres, mname="biclust", bplot="all", gby="genes", bnum=1, teta=120, ph=30)
 }

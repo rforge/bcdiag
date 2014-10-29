@@ -11,7 +11,7 @@
 #' @bnum; biclust number; must be an existed biclust. 
 
 #-------------------------------------#
-profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust"),bplot="all",gby="genes",bnum=1,teta=120,ph=30){
+profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplot="all",gby="genes",bnum=1,teta=120,ph=30){
 	
 	# Small extra for the GUI
 	if(bplot=="threeD"){bplot <- "3D"}	
@@ -20,14 +20,14 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust"),bplot="all",g
 	if(any(!bplot %in% c("all","boxplot","lines","3D","histogram"))) {
 		stop("`bplot' must be one of `boxplot', `lines', `3D','histogram' or `all'")
 	}
-	if(any(!mname %in% c("fabia","isa2","biclust"))) {
-		stop("`m.name' must be one of `fabia', `biclust'")
+	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
+		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
 	}
 	if(any(!gby %in% c("genes","conditions"))) {
 		stop("`gby' must be one of `genes', `conditions'")
 	}
-	if(any(!mname %in% c("fabia","isa2","biclust"))){
-		stop("`mname' must be one of `fabia',`isa2' or biclust")
+	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
+		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
 	} 
 	par(mfrow=c(1,1))
 	ind.gc<-indexedBic(dset,bres,mname,bnum)# returns the required indecies based on thier method names

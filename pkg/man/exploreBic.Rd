@@ -11,12 +11,14 @@ exploreBic(dset, bres, gby ="genes", pfor ="mean", mname ="biclust", bnum =1)
   \item{bres}{bicluster result.}
   \item{gby}{dimension to plot; 'genes' or 'conditions'.}
   \item{pfor}{plot for 'mean', 'median', 'variance', 'mad', 'all', or 'quant' (quantile).}
-  \item{mname}{method name; 'biclust', 'isa2' or 'fabia'}
+  \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'}
   \item{bnum}{existing biclusters; '1','2'...}
 }
 \details{The exploreBic function is mainly used for exploratory data analysis. It provides summary plots for mean, median, variance, MAD and quantile plot.
 
 The \code{\link{exploreBic}} function checks if the parameters are appropriately submitted and then identifies the biclusters submatrix and calculates its summary statistics. Finally, the results are displayed on the required plot.
+
+Note that the \code{"biclust"} option for \code{mname} will also accept results from the packages \pkg{iBBiG} and \pkg{rqubic}.
 }
 \value{
 Summary plot will display according to the user specification.
