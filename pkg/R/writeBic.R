@@ -59,12 +59,15 @@ writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2",
 		for (i in 1:bicResult@Number) {
 			listar = row(matrix(bicResult@RowxNumber[, i]))[bicResult@RowxNumber[,i] == T]
 			listac = row(matrix(bicResult@NumberxCol[i, ]))[bicResult@NumberxCol[i,] == T]
-			write(c(length(listar), length(listac)), file = fileName, 
-				ncolumns = 2, append = TRUE, sep = delimiter)
-			write(geneNames[listar], file = fileName, ncolumns = length(listar), 
-				append = TRUE, sep = delimiter)
-			write(arrayNames[listac], file = fileName, ncolumns = length(listac), 
-				append = TRUE, sep = delimiter)
+			
+			if(length(listar)>0 & length(listac)>0){				
+				write(c(length(listar), length(listac)), file = fileName, 
+					ncolumns = 2, append = TRUE, sep = delimiter)
+				write(geneNames[listar], file = fileName, ncolumns = length(listar), 
+					append = TRUE, sep = delimiter)
+				write(arrayNames[listac], file = fileName, ncolumns = length(listac), 
+					append = TRUE, sep = delimiter)
+			}
 		}
 	}
 	if(check=="bicare"){
