@@ -4,7 +4,8 @@
 
 \description{Provides exploratory plots for biclustered and clustered data.}
 \usage{
-exploreBic(dset, bres, gby ="genes", pfor ="mean", mname ="biclust", bnum =1)
+exploreBic(dset, bres, gby ="genes", pfor ="mean", mname ="biclust", bnum =1, 
+fabia.thresZ=0.5,fabia.thresL=NULL)
 }
 \arguments{
   \item{dset}{data matrix.}
@@ -13,6 +14,9 @@ exploreBic(dset, bres, gby ="genes", pfor ="mean", mname ="biclust", bnum =1)
   \item{pfor}{plot for 'mean', 'median', 'variance', 'mad', 'all', or 'quant' (quantile).}
   \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'}
   \item{bnum}{existing biclusters; '1','2'...}
+  \item{fabia.thresZ}{Bicluster threshold for \code{mname="fabia"}. Threshold for sample belonging to bicluster; default 0.5.}
+  \item{fabia.thresL}{Bicluster threshold for \code{mname="fabia"}. Threshold for loading belonging to bicluster (if not given it is estimated).}
+  
 }
 \details{The exploreBic function is mainly used for exploratory data analysis. It provides summary plots for mean, median, variance, MAD and quantile plot.
 

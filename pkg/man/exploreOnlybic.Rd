@@ -4,7 +4,8 @@
 
 \description{Provides exploratory plots only for biclustering results.}
 \usage{
-exploreOnlybic(dset, bres, pfor= "all", gby= "genes", mname="biclust",bnum=1)
+exploreOnlybic(dset, bres, pfor= "all", gby= "genes", mname="biclust",bnum=1, 
+fabia.thresZ=0.5,fabia.thresL=NULL)
 }
 \arguments{
   \item{dset}{data matrix.}
@@ -13,6 +14,8 @@ exploreOnlybic(dset, bres, pfor= "all", gby= "genes", mname="biclust",bnum=1)
   \item{pfor}{fit a plot for 'mean', 'median', 'variance', 'mad', 'all', or 'quant' (quantile).}
   \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'.}
   \item{bnum}{existing biclusters; '1','2'...}
+  \item{fabia.thresZ}{Bicluster threshold for \code{mname="fabia"}. Threshold for sample belonging to bicluster; default 0.5.}
+  \item{fabia.thresL}{Bicluster threshold for \code{mname="fabia"}. Threshold for loading belonging to bicluster (if not given it is estimated).}
 }
 \details{The exploreOnlybic function has similar function with \code{\link{exploreBic}}. The only difference is that it provides exploratory plots only for biclustered data.}
 \value{

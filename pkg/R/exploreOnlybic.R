@@ -8,7 +8,7 @@
 #' @gby, group by 'conditions' or 'genes'
 
 #----------------
-exploreOnlybic<-function(dset,bres,pfor="all",gby="genes",mname="biclust",bnum=1){
+exploreOnlybic<-function(dset,bres,pfor="all",gby="genes",mname="biclust",bnum=1,fabia.thresZ=0.5,fabia.thresL=NULL){
 	
 	# Change of variable name (to have same name convention as 'explorebic')
 	fit <- pfor
@@ -23,7 +23,7 @@ exploreOnlybic<-function(dset,bres,pfor="all",gby="genes",mname="biclust",bnum=1
 		stop("`fit' must be one of `all','mean','median','variance','mad'")
 	} 
 	
-	indgc<-indexedBic(dset,bres,mname,bnum)# returns the required indecies based on thier method names
+	indgc<-indexedBic(dset,bres,mname,bnum,fabia.thresZ=fabia.thresZ,fabia.thresL=fabia.thresL)# returns the required indecies based on thier method names
 	indg<-indgc[[1]]
 	indc<-indgc[[2]]
 	bic<-dset[indg,indc]

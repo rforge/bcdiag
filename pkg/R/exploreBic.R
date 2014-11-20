@@ -12,7 +12,7 @@
 #' a printed summary of the two groups(biclust and outbic)
 
 #----------------------
-exploreBic<-function(dset,bres,gby="genes",pfor="mean",mname="biclust",bnum=1){
+exploreBic<-function(dset,bres,gby="genes",pfor="mean",mname="biclust",bnum=1,fabia.thresZ=0.5,fabia.thresL=NULL){
 		
 	if(any(!pfor %in% c("all","mean","variance","median","quant","mad"))) {
 		stop("`pfor' must be one of `all', `mean', `variance','median', mad, or `quant'")
@@ -23,7 +23,7 @@ exploreBic<-function(dset,bres,gby="genes",pfor="mean",mname="biclust",bnum=1){
 	if(any(!gby %in% c("genes","conditions"))){
 		stop("`gby' must be one of `genes', or `conditions'")
 	}
-	ind.gc<-indexedBic(dset,bres,mname,bnum)
+	ind.gc<-indexedBic(dset,bres,mname,bnum,fabia.thresZ=fabia.thresZ,fabia.thresL=fabia.thresL)
 	indg<-ind.gc[[1]]
 	indc<-ind.gc[[2]]
 	#check the group

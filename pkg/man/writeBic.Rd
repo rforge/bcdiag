@@ -6,7 +6,8 @@
 
 \usage{
 writeBic(dset, fileName, bicResult, bicname, 
-mname = c("fabia", "isa2", "biclust","bicare"), append = TRUE, delimiter = " ")
+mname = c("fabia", "isa2", "biclust","bicare"), append = TRUE, delimiter = " ", 
+fabia.thresZ=0.5,fabia.thresL=NULL)
 }
 
 \arguments{
@@ -17,6 +18,8 @@ mname = c("fabia", "isa2", "biclust","bicare"), append = TRUE, delimiter = " ")
   \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'}
   \item{append}{logical value; TRUE as default}
   \item{delimiter}{delimiter in created output file; default value is " ".}
+  \item{fabia.thresZ}{Bicluster threshold for \code{mname="fabia"}. Threshold for sample belonging to bicluster; default 0.5.}
+  \item{fabia.thresL}{Bicluster threshold for \code{mname="fabia"}. Threshold for loading belonging to bicluster (if not given it is estimated).}
 }
 
 \details{The original function was developed in 'biclust' package by Kaiser \emph{et.al} (2008). We extend the function to be used for further bicluster algorithms, such as; 'isa2', 'fabia' and 'bicare'.

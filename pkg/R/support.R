@@ -2,6 +2,7 @@
 
 #--------------------------
 #' A function to transform the isa2 results to biclust results
+#' @x, isa object
 #--------------------------
 
 isa2biclust <- function(x){
@@ -133,14 +134,14 @@ explorePlot<-function(sbic,obic,pfor=c("all","mean","median","variance","mad","q
 #' @ indc; index for the biclust conditions.
 
 #----------------------
-indexedBic<-function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bnum){
+indexedBic<-function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bnum,fabia.thresZ=0.5,fabia.thresL=NULL){
 	# which biclust object is it; 
 	check<-match.arg(mname)
 	l<-bnum
 	if(check=="fabia"){
 		#Extract biclusters:
 		#get the biclust index inside the dset 
-		resf <- extractBic(bres)
+		resf <- extractBic(bres,thresZ=fabia.thresZ,thresL=fabia.thresL)
 		bg<-resf$numn[l,]$numng
 		bc<-resf$numn[l,]$numnp
 		# the two indecies	

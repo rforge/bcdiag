@@ -11,7 +11,7 @@
 #' @bnum; biclust number; must be an existed biclust. 
 
 #-------------------------------------#
-profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplot="all",gby="genes",bnum=1,teta=120,ph=30){
+profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplot="all",gby="genes",bnum=1,teta=120,ph=30,fabia.thresZ=0.5,fabia.thresL=NULL){
 	
 	# Small extra for the GUI
 	if(bplot=="threeD"){bplot <- "3D"}	
@@ -30,7 +30,7 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
 	} 
 	par(mfrow=c(1,1))
-	ind.gc<-indexedBic(dset,bres,mname,bnum)# returns the required indecies based on thier method names
+	ind.gc<-indexedBic(dset,bres,mname,bnum,fabia.thresZ=fabia.thresZ,fabia.thresL=fabia.thresL)# returns the required indecies based on thier method names
 	indg<-ind.gc[[1]]
 	indc<-ind.gc[[2]]
 	

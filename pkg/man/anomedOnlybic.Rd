@@ -4,7 +4,8 @@
 }
 \description{Provides ANOVA and median polish residual plots for biclustered data.}
 \usage{
-anomedOnlybic(dset, bres, fit="boxplot", mname="biclust", bnum=1)
+anomedOnlybic(dset, bres, fit="boxplot", mname="biclust", bnum=1, 
+fabia.thresZ=0.5,fabia.thresL=NULL)
 }
 \arguments{
   \item{dset}{data matrix.}
@@ -13,6 +14,8 @@ anomedOnlybic(dset, bres, fit="boxplot", mname="biclust", bnum=1)
 'aplot','mplot','anovbplot','mpolishbplot','boxplot'.}
   \item{mname}{method name; 'biclust', 'isa2', 'fabia' or 'bicare'.}
   \item{bnum}{existing biclusters; '1','2'...}
+  \item{fabia.thresZ}{Bicluster threshold for \code{mname="fabia"}. Threshold for sample belonging to bicluster; default 0.5.}
+  \item{fabia.thresL}{Bicluster threshold for \code{mname="fabia"}. Threshold for loading belonging to bicluster (if not given it is estimated).}
 }
 \details{A function provides residuals plots for biclustered data based on ANOVA and median polish.
 

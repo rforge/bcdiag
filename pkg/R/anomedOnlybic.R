@@ -8,14 +8,14 @@
 
 #----------------
 
-anomedOnlybic <- function(dset,bres,fit="boxplot",mname="biclust",bnum=1){
+anomedOnlybic <- function(dset,bres,fit="boxplot",mname="biclust",bnum=1,fabia.thresZ=0.5,fabia.thresL=NULL){
 	if(any(!fit %in% c("aplot","mplot","anovbplot","mpolishbplot","boxplot"))){
 		stop("`fit' must be one of 'aplot','mplot','anovbplot','mpolishbplot',`boxplot'")
 	} 
 	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
 		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
 	} 
-	indgc<-indexedBic(dset,bres,mname,bnum)# returns the required indecies based on thier method names
+	indgc<-indexedBic(dset,bres,mname,bnum,fabia.thresZ=fabia.thresZ,fabia.thresL=fabia.thresL)# returns the required indecies based on their method names
 	indg<-indgc[[1]]
 	indc<-indgc[[2]]
 	bic<-dset[indg,indc]

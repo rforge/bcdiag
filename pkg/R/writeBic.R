@@ -12,7 +12,7 @@
 
 #-------------------------
 
-writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2","biclust","bicare"),append = TRUE, delimiter = " "){
+writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2","biclust","bicare"),append = TRUE, delimiter = " ",fabia.thresZ=0.5,fabia.thresL=NULL){
 	#check the method name
 	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
 		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
@@ -23,7 +23,7 @@ writeBic<-function (dset,fileName, bicResult, bicname, mname = c("fabia","isa2",
 	check<- match.arg(mname)
 	if(check=="fabia") {
 		#Extract biclusters:
-		resb <-extractBic(bicResult)
+		resb <-extractBic(bicResult,thresZ=fabia.thresZ,thresL=fabia.thresL)
 		write(c(resb$np,bicname), file = fileName, append = append)
 		for (i in 1:resb$np) {
 			listar = matrix(resb$bic[i,]$bixn)

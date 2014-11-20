@@ -7,7 +7,7 @@ The  profileBic function.
 }
 \usage{
 profileBic(dset, bres, mname = c("fabia", "isa2", "biclust","bicare"), bplot = "all",
-gby = "genes", bnum = 1, teta = 120, ph = 30)
+gby = "genes", bnum = 1, teta = 120, ph = 30, fabia.thresZ=0.5,fabia.thresL=NULL)
 }
 \arguments{
   \item{dset}{data matrix.}
@@ -18,6 +18,8 @@ gby = "genes", bnum = 1, teta = 120, ph = 30)
   \item{bnum}{Existing biclusters; '1','2',...}
   \item{teta}{numerical value to rotate the 3D; 0, 90, 180,...}
   \item{ph}{numerical value to rotate the 3D; 0, 90, 180,...}
+  \item{fabia.thresZ}{Bicluster threshold for \code{mname="fabia"}. Threshold for sample belonging to bicluster; default 0.5.}
+  \item{fabia.thresL}{Bicluster threshold for \code{mname="fabia"}. Threshold for loading belonging to bicluster (if not given it is estimated).}
 }
 \details{
 The profile.bic function checks if all parameters are correctly submitted and then identifies the biclustered and clustered data.
