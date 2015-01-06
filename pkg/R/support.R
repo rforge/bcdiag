@@ -1,8 +1,26 @@
+#--------------------------
+
+#' A support function to control the grid. 
+#' Primarily used for the GUI in which BcDiag is implemented (RcmdrPlugin.BiclustGUI)
+
+#--------------------------
+
+.checkcurrentgrid <- function(nplots=2,change.x,change.y){
+	grid.x <- par()$mfrow[1]
+	grid.y <- par()$mfrow[2]
+	
+	if(grid.x!=1 & grid.y!=1 & grid.x*grid.y>=nplots){}
+	else{
+		par(mfrow=c(change.x,change.y))
+	}
+}
 
 
 #--------------------------
+
 #' A function to transform the isa2 results to biclust results
 #' @x, isa object
+
 #--------------------------
 
 isa2biclust <- function(x){
@@ -78,16 +96,17 @@ explorePlot<-function(sbic,obic,pfor=c("all","mean","median","variance","mad","q
 	pfor<-match.arg(pfor)
 	if(pfor=="all"){
 		mname<-c("Mean","Median","Variance","MAD")
-		par(mfrow=c(2,2))
+		#par(mfrow=c(2,2))
+		.checkcurrentgrid(4,2,2)
 		for(i in 1:4){
 			plot(c(sbic[[i]],obic[[i]]),type="n",col=4,ylab="",xlab="",main=mname[i])
 			lines(c(sbic[[i]],obic[[i]]),type="l",col=1)
 			lines(sbic[[i]],col=2)
 		}
 	}
-	par(mfrow=c(1,1))
+	#par(mfrow=c(1,1))
 	if(pfor=="quant"){
-		par(mfrow=c(1,1))
+		#par(mfrow=c(1,1))
 		bquant1<-sbic[[5]][[1]];oquant1<-obic[[5]][[1]]
 		bquant2<-sbic[[5]][[2]];oquant2<-obic[[5]][[2]]
 		bquant3<-sbic[[5]][[3]];oquant3<-obic[[5]][[3]]
@@ -193,14 +212,15 @@ plotOnlybic<-function(ball,fit="all",gby){
 	if(fit=="all"){
 		#biclust genes
 		sname<-c("Median","Mean","Variance","MAD")
-		par(mfrow=c(2,2))
+		#par(mfrow=c(2,2))
+		.checkcurrentgrid(4,2,2)
 		for(i in 1:length(ball)){
 			plot(ball[[i]],type="n",main=sname[i],ylab="",xlab=gby)
 			lines(ball[[i]],type="l",col=i+1)
 			
 		}
 	}
-	par(mfrow=c(1,1))
+	#par(mfrow=c(1,1))
 	if(fit=="median")
 	{
 		plot(ball[[1]],type="n",main="Median",ylab="",xlab="Condtions")

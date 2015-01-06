@@ -29,7 +29,7 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 	if(any(!mname %in% c("fabia","isa2","biclust","bicare"))){
 		stop("`mname' must be one of `fabia',`isa2', 'biclust' or 'bicare'")
 	} 
-	par(mfrow=c(1,1))
+	#par(mfrow=c(1,1))
 	ind.gc<-indexedBic(dset,bres,mname,bnum,fabia.thresZ=fabia.thresZ,fabia.thresL=fabia.thresL)# returns the required indecies based on thier method names
 	indg<-ind.gc[[1]]
 	indc<-ind.gc[[2]]
@@ -82,7 +82,8 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 
 		}
 		if(bplot=="all"){
-			par(mfrow=c(2,2))
+			#par(mfrow=c(2,2))
+			.checkcurrentgrid(4,2,2)
 			profileAll(dset,indg,indc,grp,gby)
 		}
 	}
@@ -133,7 +134,8 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 			box()
 		}
 		if(bplot=="all"){
-			par(mfrow=c(2,2))
+			#par(mfrow=c(2,2))
+			.checkcurrentgrid(4,2,2)
 			profileAll(dset,indg,indc,grp,gby)
 		}
 	}

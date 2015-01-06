@@ -28,7 +28,8 @@ anomedOnlybic <- function(dset,bres,fit="boxplot",mname="biclust",bnum=1,fabia.t
 	bvgc<-cbind(vbic,gn,cn)
 	fitan<-aov(vbic~as.factor(gn)+as.factor(cn))
 	if(fit=="aplot"){
-		 par(mfrow=c(2,2))
+		 #par(mfrow=c(2,2))
+		 .checkcurrentgrid(4,2,2)
 		 plot(fitan)
 		
 	}
@@ -37,12 +38,13 @@ anomedOnlybic <- function(dset,bres,fit="boxplot",mname="biclust",bnum=1,fabia.t
 	fitmp<-medpolish(bic, eps = 0.01, maxiter = 10, trace.iter = TRUE,na.rm = FALSE)
 	if(fit=="mplot")
 	{
-		par(mfrow=c(1,1))
+		#par(mfrow=c(1,1))
 		plot(fitmp)
 	}
 	
 	if(fit=="boxplot"){
-		par(mfrow=c(2,2))
+		#par(mfrow=c(2,2))
+		.checkcurrentgrid(4,2,2)
 		#residual boxplot for anova
 		boxplot(split(fitan$resid,as.factor(cn)),col=3,main="Resid vs Condition(ANOVA)")
 		boxplot(split(fitan$resid,as.factor(gn)),add=F,col=2,main="Resid vs Genes(ANOVA)")
@@ -54,14 +56,16 @@ anomedOnlybic <- function(dset,bres,fit="boxplot",mname="biclust",bnum=1,fabia.t
 	}
 	if(fit=="anovbplot"){
 		#residual boxplot for anova
-		par(mfrow=c(2,1))
+		#par(mfrow=c(2,1))
+		.checkcurrentgrid(2,2,1)
 		boxplot(split(fitan$resid,as.factor(cn)),col=3,main="Resid vs Condition(ANOVA)")
 		boxplot(split(fitan$resid,as.factor(gn)),add=F,col=2,main="Resid vs Genes(ANOVA)")
 
 	}
 	if(fit=="mpolishbplot"){
 		#residual boxplot for median polish 
-		par(mfrow=c(2,1))
+		#par(mfrow=c(2,1))
+		.checkcurrentgrid(2,2,1)
 		boxplot(split(fitmp$resid,as.factor(cn)),col=3,main="Resid vs Conditions(Mpolish)")
 		boxplot(split(fitmp$resid,as.factor(gn)),col=2,main="Resid vs Genes(Mpolish)")
 	}
