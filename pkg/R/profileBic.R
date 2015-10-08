@@ -11,7 +11,7 @@
 #' @bnum; biclust number; must be an existed biclust. 
 
 #-------------------------------------#
-profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplot="all",gby="genes",bnum=1,teta=120,ph=30,fabia.thresZ=0.5,fabia.thresL=NULL){
+profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplot="all",gby="genes",bnum=1,teta=120,ph=30,fabia.thresZ=0.5,fabia.thresL=NULL,BClabel=TRUE){
 	
 	# Small extra for the GUI
 	if(bplot=="threeD"){bplot <- "3D"}	
@@ -38,17 +38,43 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 	if(gby=="conditions"){
 		#group the genes in to two.
 		cnams <- colnames(dset)
+		gnams <- rownames(dset)
 		grp <- rep(1, length(cnams))
 		grp[indc] <- 2
 		d<-dset[indg, order(grp, decreasing=TRUE)]
 		dbc<-dset[indg,(grp==2)]
 		
 		if(bplot=="lines"){
+			
+
+			if(BClabel){
+				mar.temp <- par()$mar
+				
+				max.g.nchar <- max(sapply(gnams,FUN=nchar))
+				if(max.g.nchar>11){
+					par(mar=par()$mar+c(0,0.2*(max.g.nchar-11),0,0))
+				}
+				max.c.nchar <- max(sapply(cnams,FUN=nchar))
+				if(max.c.nchar>14){
+					par(mar=par()$mar+c(0.15*(max.c.nchar-11),0,0,0))
+					
+				}
+			}
+			
 			matplot(y =t(d),type ="n",col="green3", xlab="Condtions",ylab="Expression", axes=T, pch = rep(1, ncol(d)))
 			matlines(y = t(d), type = "l",lty = rep(1, nrow(d)) ,col="green3", lwd = 1, pch = 1)
 			matlines(y = t(dbc), type = "l",lty = rep(1, nrow(d)) ,col="red", lwd = 1, pch = 1)
 			legend("topright",c( "Biclust conditions","Outside Condtions"), col=c("red","green3"),lty=c(1,1))
-			box()
+			
+			if(BClabel){
+				axis(side=2,at=d[,1],labels=gnams[indg],las=1,cex.axis=0.7)
+				axis(side=1,at=c(1:length(indc)),labels=colnames(dbc),las=2,cex.axis=0.7)
+				
+				print(par()$mar)
+				par(mar=mar.temp)
+				print(par()$mar)
+			}
+#			box()
 		}
 		
 		if(bplot=="boxplot"){
@@ -92,18 +118,41 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 	if(gby=="genes"){
 		#group the genes in to two.
 		rnams <- rownames(dset)
+		cnams <- colnames(dset)
 		grp <- rep(1, length(rnams))
 		grp[indg] <- 2
 		d<-dset[order(grp, decreasing=T),indc]
 		dbc<-dset[(grp==2),indc]
 		
 		if(bplot=="lines"){
+			
+		if(BClabel){
+			mar.temp <- par()$mar
+				
+			max.g.nchar <- max(sapply(rnams,FUN=nchar))
+			if(max.g.nchar>14){
+				par(mar=par()$mar+c(0.15*(max.g.nchar-11),0,0,0))
+			}
+			max.c.nchar <- max(sapply(cnams,FUN=nchar))
+			if(max.c.nchar>11){
+				par(mar=par()$mar+c(0,0.2*(max.c.nchar-11),0,0))
+					
+			}
+		}	
+			
 		matplot(y = d, type = "n",xlab="Genes",ylab="Expression", axes=T, pch = rep(1, ncol(dset)))
 		matlines(y = d, type = "l", col="black",lty = rep(1, nrow(dset)),lwd = 1, pch = 1) 
 		matlines(y = dbc, type = "l",col="red",lty = rep(1, nrow(dset)) , lwd = 1, pch = 1)
 		legend("topright",c( "Bic genes","Outbic genes"), col=c("red","black"),lty=c(1,1))
-		axis(2)
-		box()
+		if(BClabel){
+			axis(side=2,at=d[1,],labels=cnams[indc],las=1,cex.axis=0.7)
+			axis(side=1,at=c(1:length(indg)),labels=rownames(dbc),las=2,cex.axis=0.7)
+			
+			print(par()$mar)
+			par(mar=mar.temp)
+			print(par()$mar)
+		}
+#		box()
 		}
 		
 		if(bplot=="boxplot"){
