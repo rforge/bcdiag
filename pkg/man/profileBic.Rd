@@ -7,7 +7,8 @@ The  profileBic function.
 }
 \usage{
 profileBic(dset, bres, mname = c("fabia", "isa2", "biclust","bicare"), bplot = "all",
-gby = "genes", bnum = 1, teta = 120, ph = 30, fabia.thresZ=0.5,fabia.thresL=NULL,BClabel=TRUE)
+gby = "genes", bnum = 1, teta = 120, ph = 30, fabia.thresZ=0.5,fabia.thresL=NULL,
+BClabel=TRUE)
 }
 \arguments{
   \item{dset}{data matrix.}
