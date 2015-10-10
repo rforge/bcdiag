@@ -70,9 +70,9 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 				axis(side=2,at=d[,1],labels=gnams[indg],las=1,cex.axis=0.7)
 				axis(side=1,at=c(1:length(indc)),labels=colnames(dbc),las=2,cex.axis=0.7)
 				
-				#print(par()$mar)
+#				print(par()$mar)
 				par(mar=mar.temp)
-				#print(par()$mar)
+#				print(par()$mar)
 			}
 #			box()
 		}
@@ -148,9 +148,9 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 			axis(side=2,at=d[1,],labels=cnams[indc],las=1,cex.axis=0.7)
 			axis(side=1,at=c(1:length(indg)),labels=rownames(dbc),las=2,cex.axis=0.7)
 			
-			#print(par()$mar)
+#			print(par()$mar)
 			par(mar=mar.temp)
-			#print(par()$mar)
+#			print(par()$mar)
 		}
 #		box()
 		}
