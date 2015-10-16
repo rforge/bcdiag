@@ -11,10 +11,15 @@
 #' @bnum; biclust number; must be an existed biclust. 
 
 #-------------------------------------#
-profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplot="all",gby="genes",bnum=1,teta=120,ph=30,fabia.thresZ=0.5,fabia.thresL=NULL,BClabel=TRUE){
+profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplot="all",gby="genes",bnum=1,teta=120,ph=30,fabia.thresZ=0.5,fabia.thresL=NULL,BClabel=TRUE,gene.lines=NULL,condition.lines=NULL){
 	
 	# Small extra for the GUI
 	if(bplot=="threeD"){bplot <- "3D"}	
+	
+	highlight.g <- gene.lines
+	highlight.c <- condition.lines
+	
+
 
 	#check if the bic number to plotted is specified and
 	if(any(!bplot %in% c("all","boxplot","lines","3D","histogram"))) {
@@ -34,6 +39,7 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 	indg<-ind.gc[[1]]
 	indc<-ind.gc[[2]]
 	
+		
 	# gby conditions	
 	if(gby=="conditions"){
 		#group the genes in to two.
@@ -46,7 +52,7 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 		
 		if(bplot=="lines"){
 			
-
+			
 			if(BClabel){
 				mar.temp <- par()$mar
 				
@@ -61,14 +67,86 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 				}
 			}
 			
+			col.line <- rep("green3",nrow(d))
+			col.bcline <- rep("red",nrow(d))
+			lwd.line <- rep(1,nrow(d))
+			
+			if(!is.null(highlight.g)){
+				
+				if(class(highlight.g)=="character"){
+					sel.g <- sapply(highlight.g,FUN=function(x){
+								temp <- which(x==gnams[indg])
+								if(length(temp)==0){stop(paste0("gene.lines contains genes which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+					
+				}
+				if(class(highlight.g)=="numeric"){
+					sel.g <- sapply(highlight.g,FUN=function(x){
+								temp <- which(x==indg)
+								if(length(temp)==0){stop(paste0("gene.lines contains genes which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+				}
+				
+				
+				col.line[-sel.g] <- "grey"
+				col.bcline[-sel.g] <- "grey"
+				lwd.line[sel.g] <- 2
+			}
+			if(!is.null(highlight.c)){
+				
+				if(class(highlight.c)=="character"){
+					
+					sel.c <- sapply(highlight.c,FUN=function(x){
+								temp <- which(x==cnams[indc])
+								if(length(temp)==0){stop(paste0("condition.lines contains conditions which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+				}
+				if(class(highlight.c)=="numeric"){
+					
+					sel.c <- sapply(highlight.c,FUN=function(x){
+								temp <- which(x==indc) 
+								if(length(temp)==0){stop(paste0("condition.lines contains conditions which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+				}
+				
+
+			}
+			
+			
 			matplot(y =t(d),type ="n",col="green3", xlab="Condtions",ylab="Expression", axes=T, pch = rep(1, ncol(d)))
-			matlines(y = t(d), type = "l",lty = rep(1, nrow(d)) ,col="green3", lwd = 1, pch = 1)
-			matlines(y = t(dbc), type = "l",lty = rep(1, nrow(d)) ,col="red", lwd = 1, pch = 1)
+			
+			if(is.null(highlight.g)){
+				matlines(y = t(d), type = "l",lty = rep(1, nrow(d)) ,col="green3", lwd = 1, pch = 1)
+				matlines(y = t(dbc), type = "l",lty = rep(1, nrow(d)) ,col="red", lwd = 1, pch = 1)
+			}
+			else{
+				matlines(y = t(d)[,c((1:length(indg))[-sel.g],sel.g)], type = "l",lty = rep(1, nrow(d)) ,col=col.line[c((1:length(indg))[-sel.g],sel.g)], lwd = lwd.line[c((1:length(indg))[-sel.g],sel.g)], pch = 1)
+				matlines(y = t(dbc)[,c((1:length(indg))[-sel.g],sel.g)], type = "l",lty = rep(1, nrow(d)) ,col=col.bcline[c((1:length(indg))[-sel.g],sel.g)], lwd = lwd.line[c((1:length(indg))[-sel.g],sel.g)], pch = 1)
+				
+			}
+			
+			
 			legend("topright",c( "Biclust conditions","Outside Condtions"), col=c("red","green3"),lty=c(1,1))
 			
 			if(BClabel){
-				axis(side=2,at=d[,1],labels=gnams[indg],las=1,cex.axis=0.7)
-				axis(side=1,at=c(1:length(indc)),labels=colnames(dbc),las=2,cex.axis=0.7)
+				if(is.null(highlight.c)){
+					axis(side=1,at=c(1:length(indc)),labels=colnames(dbc),las=2,cex.axis=0.7)
+				}
+				else{
+					axis(side=1,at=c(1:length(indc))[-sel.c],labels=colnames(dbc)[-sel.c],las=2,cex.axis=0.7,col.axis="grey")
+					axis(side=1,at=c(1:length(indc))[sel.c],labels=colnames(dbc)[sel.c],las=2,cex.axis=0.7,col.axis="black")
+				}
+				if(is.null(highlight.g)){
+					axis(side=2,at=d[,1],labels=gnams[indg],las=1,cex.axis=0.7)
+				}
+				else{
+					axis(side=2,at=d[,1][-sel.g],labels=gnams[indg][-sel.g],las=1,cex.axis=0.7,col.axis="grey")
+					axis(side=2,at=d[,1][sel.g],labels=gnams[indg][sel.g],las=1,cex.axis=0.7,col.axis="black")
+				}
 				
 #				print(par()$mar)
 				par(mar=mar.temp)
@@ -117,41 +195,112 @@ profileBic <- function(dset,bres,mname=c("fabia","isa2","biclust","bicare"),bplo
 	#gby genes
 	if(gby=="genes"){
 		#group the genes in to two.
-		rnams <- rownames(dset)
+		gnams <- rownames(dset)
 		cnams <- colnames(dset)
-		grp <- rep(1, length(rnams))
+		grp <- rep(1, length(gnams))
 		grp[indg] <- 2
 		d<-dset[order(grp, decreasing=T),indc]
 		dbc<-dset[(grp==2),indc]
 		
 		if(bplot=="lines"){
 			
-		if(BClabel){
-			mar.temp <- par()$mar
+			if(BClabel){
+				mar.temp <- par()$mar
 				
-			max.g.nchar <- max(sapply(rnams,FUN=nchar))
-			if(max.g.nchar>14){
-				par(mar=par()$mar+c(0.15*(max.g.nchar-11),0,0,0))
-			}
-			max.c.nchar <- max(sapply(cnams,FUN=nchar))
-			if(max.c.nchar>11){
-				par(mar=par()$mar+c(0,0.2*(max.c.nchar-11),0,0))
+				max.g.nchar <- max(sapply(gnams,FUN=nchar))
+				if(max.g.nchar>14){
+					par(mar=par()$mar+c(0.15*(max.g.nchar-11),0,0,0))
+				}
+				max.c.nchar <- max(sapply(cnams,FUN=nchar))
+				if(max.c.nchar>11){
+					par(mar=par()$mar+c(0,0.2*(max.c.nchar-11),0,0))
 					
+				}
+			}	
+			
+			col.line <- rep("black",nrow(dset))
+			col.bcline <- rep("red",nrow(dset))
+			lwd.line <- rep(1,nrow(dset))
+			
+			if(!is.null(highlight.c)){
+				if(class(highlight.c)=="character"){
+					
+					sel.c <- sapply(highlight.c,FUN=function(x){
+								temp <- which(x==cnams[indc])
+								if(length(temp)==0){stop(paste0("condition.lines contains conditions which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+				}
+				if(class(highlight.c)=="numeric"){
+					
+					sel.c <- sapply(highlight.c,FUN=function(x){
+								temp <- which(x==indc) 
+								if(length(temp)==0){stop(paste0("condition.lines contains conditions which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+				}
+				
+
+				col.line[-sel.c] <- "grey"
+				col.bcline[-sel.c] <- "grey"
+				lwd.line[sel.c] <- 2
 			}
-		}	
+			if(!is.null(highlight.g)){
+				if(class(highlight.g)=="character"){
+					sel.g <- sapply(highlight.g,FUN=function(x){
+								temp <- which(x==gnams[indg])
+								if(length(temp)==0){stop(paste0("gene.lines contains genes which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+					
+				}
+				if(class(highlight.g)=="numeric"){
+					sel.g <- sapply(highlight.g,FUN=function(x){
+								temp <- which(x==indg)
+								if(length(temp)==0){stop(paste0("gene.lines contains genes which are not in bicluster ",bnum),call.=FALSE)}
+								return(temp)
+							})
+				}		
+			}
 			
-		matplot(y = d, type = "n",xlab="Genes",ylab="Expression", axes=T, pch = rep(1, ncol(dset)))
-		matlines(y = d, type = "l", col="black",lty = rep(1, nrow(dset)),lwd = 1, pch = 1) 
-		matlines(y = dbc, type = "l",col="red",lty = rep(1, nrow(dset)) , lwd = 1, pch = 1)
-		legend("topright",c( "Bic genes","Outbic genes"), col=c("red","black"),lty=c(1,1))
-		if(BClabel){
-			axis(side=2,at=d[1,],labels=cnams[indc],las=1,cex.axis=0.7)
-			axis(side=1,at=c(1:length(indg)),labels=rownames(dbc),las=2,cex.axis=0.7)
 			
+			matplot(y = d, type = "n",xlab="Genes",ylab="Expression", axes=T, pch = rep(1, ncol(dset)))
+			
+			if(is.null(highlight.c)){
+				matlines(y = d, type = "l", col="black",lty = rep(1, nrow(dset)),lwd = 1, pch = 1) 
+				matlines(y = dbc, type = "l",col="red",lty = rep(1, nrow(dset)) , lwd = 1, pch = 1)
+			}
+			else{
+				matlines(y = d[,c((1:length(indc))[-sel.c],sel.c)], type = "l", col=col.line[c((1:length(indc))[-sel.c],sel.c)],lty = rep(1, nrow(dset)),lwd = lwd.line[c((1:length(indc))[-sel.c],sel.c)], pch = 1) 
+				matlines(y = dbc[,c((1:length(indc))[-sel.c],sel.c)], type = "l",col=col.bcline[c((1:length(indc))[-sel.c],sel.c)],lty = rep(1, nrow(dset)) , lwd = lwd.line[c((1:length(indc))[-sel.c],sel.c)], pch = 1)
+			}
+			
+			
+			legend("topright",c( "Bic genes","Outbic genes"), col=c("red","black"),lty=c(1,1))
+			if(BClabel){
+				
+				if(is.null(highlight.c)){
+					axis(side=2,at=d[1,],labels=cnams[indc],las=1,cex.axis=0.7)
+					
+				}
+				else{
+					axis(side=2,at=d[1,][-sel.c],labels=cnams[indc][-sel.c],las=2,cex.axis=0.7,col.axis="grey")
+					axis(side=2,at=d[1,][sel.c],labels=cnams[indc][sel.c],las=2,cex.axis=0.7,col.axis="black")
+				}
+				
+				if(is.null(highlight.g)){
+					axis(side=1,at=c(1:length(indg)),labels=rownames(dbc),las=2,cex.axis=0.7)
+					
+				}
+				else{
+					axis(side=1,at=c(1:length(indg))[-sel.g],labels=rownames(dbc)[-sel.g],las=1,cex.axis=0.7,col.axis="grey")
+					axis(side=1,at=c(1:length(indg))[sel.g],labels=rownames(dbc)[sel.g],las=1,cex.axis=0.7,col.axis="black")
+				}
+				
 #			print(par()$mar)
-			par(mar=mar.temp)
+				par(mar=mar.temp)
 #			print(par()$mar)
-		}
+			}
 #		box()
 		}
 		

@@ -1,6 +1,6 @@
 Package: BcDiag
-Version: 1.0.9
-Date: 2015-10-10
+Version: 1.0.10
+Date: 2015-10-16
 Title: Diagnostics Plots for Bicluster Data
 License: GPL-3
 Depends: R (>= 2.10)
